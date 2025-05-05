@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <meta charset="UFT-8">
+  <tittel>HTML Semántico</tittel>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <p role="button">un texto</p> <!--solo informasemanticamente que es un botón
+    y lo hace seleccionable con el teclado-->
+  <!--start header-->
+  <hr>
+  <div id="pageHeader">
+    <div id="tittle">Machine Learning Workshop</div>
+    <!--navigation-->
+    <div id="navigation">
+      <a href="#reg">Register</a>
+      <a href="about">About</a>
+      <a href="teachers">Instructors</a>
+      <a href="feedback">Testimonials</a>
+    </div>
+    <!--end navigation bar-->
+  </div>
+  <!--end of header-->
+  <hr>
+  <!--start header-->
+  <div role="banner">
+    <div role="heading" aria-level="1">Machine Learning Workshop</div>
+    <div role="navigation">
+      <a href="#reg">Register</a>
+      <a href="#about">About</a>
+      <a href="#teachers">Instructors</a>
+      <a href="#feedback">Testimonials</a>
+    </div>
+    <!--end navigation bar-->
+  </div>
+  <!--end of header-->
+  <hr>
+  <header>
+    <h1>Machine Learning Workshop</h1>
+    <nav>
+      <a href="#reg">Register</a>
+      <a href="#about">About</a>
+      <a href="#teachers">Instructors</a>
+      <a href="#feedback">Testimonials</a>
+    </nav>
+  </header>
+  <hr>
+  <h2>Default distribution web page</h2>
+  <img src="distribution.png" alt="default distribution web page" width="100%">
+
+  <details>
+    <summary>
+      &lt;header&gt;
+    </summary>
+    <p>La cabecera es la parte superior de la página web. Aquí suele incluirse
+      la información básica de la empresa o marca y es consistente en todo
+      el sitio, es decir, se repite en cada página de la web por la que navegas.</p>
+  </details>
+
+  <details>
+    <summary>
+      &lt;nav&gt;
+    </summary>
+    <p>La navegación es la parte de la página web que contiene los enlaces a
+      otras páginas del sitio. En este caso, el menú de navegación incluye
+      enlaces a las secciones de registro, información, instructores y
+      testimonios.</p>
+  </details>
+
+  <details>
+    <summary>
+      &lt;article&gt;
+    </summary>
+    <p>El artículo es una sección independiente de contenido que puede ser
+      distribuido y reutilizado. En este caso, el artículo incluye información
+      sobre el taller de Machine Learning.</p>
+  </details>
+
+  <details>
+    <summary>
+      &lt;section&gt;
+    </summary>
+    <p>La sección es una parte de la página web que contiene un conjunto
+      relacionado de contenido. En este caso, la sección incluye información
+      sobre el registro, los instructores y los testimonios.</p>
+  </details>
+
+  <details>
+    <summary>
+      &lt;aside&gt;
+    </summary>
+    <p>El aside es una sección de contenido que está relacionada con el
+      contenido principal, pero no es parte de él. En este caso, el aside
+      incluye información adicional sobre el taller de Machine Learning.</p>
+  </details>
+
+  <details>
+    <summary>
+      &lt;footer&gt;
+    </summary>
+    <p>El pie de página es la parte inferior de la página web. Aquí suele
+      incluirse información adicional sobre la empresa o marca, como la
+      dirección, el número de teléfono y los enlaces a las redes sociales.</p>
+  </details>
+
+  <details>
+    <summary>
+      &lt;address&gt;
+    </summary>
+    <p>El address es una sección de contenido que contiene información de
+      contacto. En este caso, el address incluye la dirección de la empresa
+      y el número de teléfono.</p>
+  </details>
+
+  <details>
+    <summary>
+      &lt;div&gt;
+    </summary>
+    <p>El div es un contenedor genérico que se utiliza para agrupar
+      contenido relacionado. En este caso, el div se utiliza para agrupar
+      la cabecera, la navegación y el pie de página.</p>
+  </details>
+
+  <details>
+    <summary>
+      &lt;span&gt;
+    </summary>
+    <p>El span es un contenedor en línea que se utiliza para agrupar
+      contenido relacionado. En este caso, el span se utiliza para
+      agrupar el texto dentro de un párrafo.</p>
+  </details>
+
+  <details>
+    <summary>
+      &lt;figure&gt;
+    </summary>
+    <p>El figure es una sección de contenido que contiene una imagen o
+      gráfico. En este caso, el figure incluye una imagen del taller de
+      Machine Learning.</p>
+  </details>
+
+  <details>
+    <summary>
+      &lt;figcaption&gt;
+    </summary>
+    <p>El figcaption es una sección de contenido que contiene una
+      descripción de la imagen o gráfico. En este caso, el figcaption
+      incluye una descripción del taller de Machine Learning.</p>
+  </details>
+
+  <details>
+    <summary>
+      &lt;time&gt;
+    </summary>
+    <p>El time es una sección de contenido que contiene información
+      sobre la fecha y hora. En este caso, el time incluye la fecha y
+      hora del taller de Machine Learning.</p>
+  </details>
+
+  <details>
+    <summary>
+      &lt;mark&gt;
+    </summary>
+    <p>El mark es una sección de contenido que contiene información
+      resaltada. En este caso, el mark incluye información resaltada
+      sobre el taller de Machine Learning.</p>
+  </details>
+
+  <details>
+    <summary>
+      &lt;progress&gt;
+    </summary>
+    <p>El progress es una sección de contenido que contiene información
+      sobre el progreso. En este caso, el progress incluye información
+      sobre el progreso del taller de Machine Learning.</p>
+  </details>
+
+  <details>
+    <summary>
+      &lt;meter&gt;
+    </summary>
+    <p>El meter es una sección de contenido que contiene información
+      sobre la medida. En este caso, el meter incluye información sobre
+      la medida del taller de Machine Learning.</p>
+  </details>
+
+  <details>
+    <summary>
+      &lt;template&gt;
+    </summary>
+    <p>El template es una sección de contenido que contiene un
+      modelo o plantilla. En este caso, el template incluye un modelo
+      o plantilla del taller de Machine Learning.</p>
+  </details>
+
+  <details>
+    <summary>
+      &lt;summary&gt;
+    </summary>
+    <p>El summary es una sección de contenido que contiene un resumen.
+      En este caso, el summary incluye un resumen del taller de Machine
+      Learning.</p>
+  </details>
+
+  <details>
+    <summary>
+      &lt;details&gt;
+    </summary>
+    <p>El details es una sección de contenido que contiene información
+      adicional. En este caso, el details incluye información adicional
+      sobre el taller de Machine Learning.</p>
+  </details>
+  <hr>
+
+  <p>Un diseño con un encabezado, dos barras laterales y un pie de página se
+    conoce como el diseño sagrado grial. Existen muchas formas de marcar este
+    contenido, como las siguientes:</p>
+  <pre>
+    <code>
+      < body>
+        < header>Header < /header>
+        < nav>Nav < /nav>
+        < main>Content < /main>
+        < aside>Aside < /aside>
+        < footer>Footer < /footer>
+      < /body>
+    </code>
+  </pre>
+
+  <hr>
+
+  <p>Si estás creando un blog, es posible que tengas una serie de artículos en < main>:</p>
+  <pre>
+    <code>
+      &lt;body&gt;
+      &lt;header&gt;Header &lt;/header&gt;
+      &lt;nav&gt;Nav &lt;/nav&gt;
+      &lt;main&gt;
+        &lt;article&gt;First post &lt;/article&gt;
+        &lt;article&gt;Second post &lt;/article&gt;
+      &lt;/main&gt;
+      &lt;aside&gt;Aside &lt;/aside&gt;
+      &lt;footer&gt;Footer &lt;/footer&gt;
+      &lt;/body&gt;
+    </code>
+  </pre>
+
+  <section>
+    <h4>diferencias entre &lt;article&gt; y &lt;section&gt;</h4>
+    <p>&lt;article&gt; : es como un capítulo completo o una publicación individual.
+      &lt;section&gt; : es como una parte o una sección dentro de ese capítulo o
+      publicación, o dentro de la página principal.</p>
+
+    <p>Ejemplo:
+    <pre>
+        <code>
+          &lt;!DOCTYPE html&gt;
+          &lt;html lang="es"&gt;
+          &lt;head&gt;
+              &lt;meta charset="UTF-8"&gt;
+              &lt;title&gt;Mi Blog de Cocina&lt;/title&gt;
+          &lt;/head&gt;
+          &lt;body&gt;
+              &lt;header&gt;
+                  &lt;h1&gt;Mi Blog de Cocina&lt;/h1&gt;
+                  &lt;nav&gt;
+                      &lt;ul&gt;
+                          &lt;li&gt;&lt;a href="#"&gt;Recetas&lt;/a&gt;&lt;/li&gt;
+                          &lt;li&gt;&lt;a href="#"&gt;Consejos&lt;/a&gt;&lt;/li&gt;
+                          &lt;li&gt;&lt;a href="#"&gt;Sobre mí&lt;/a&gt;&lt;/li&gt;
+                      &lt;/ul&gt;
+                  &lt;/nav&gt;
+              &lt;/header&gt;
+
+              &lt;main&gt;
+                  &lt;article&gt;
+                      &lt;header&gt;
+                          &lt;h2&gt;Receta de Tarta de Manzana Clásica&lt;/h2&gt;
+                          &lt;p&gt;Publicado el &lt;time datetime="2025-04-29"&gt;29 de abril de 2025&lt;/time&gt; por Gemini&lt;/p&gt;
+                      &lt;/header&gt;
+
+                      &lt;section&gt;
+                          &lt;h3&gt;Ingredientes&lt;/h3&gt;
+                          &lt;ul&gt;
+                              &lt;li&gt;Manzanas&lt;/li&gt;
+                              &lt;li&gt;Harina&lt;/li&gt;
+                              &lt;li&gt;Azúcar&lt;/li&gt;
+                              &lt;li&gt;Huevos&lt;/li&gt;
+                          &lt;/ul&gt;
+                      &lt;/section&gt;
+
+                      &lt;section&gt;
+                          &lt;h3&gt;Instrucciones&lt;/h3&gt;
+                          &lt;ol&gt;
+                              &lt;li&gt;Pelar y cortar las manzanas.&lt;/li&gt;
+                              &lt;li&gt;Mezclar los ingredientes secos.&lt;/li&gt;
+                              &lt;li&gt;Batir los huevos con el azúcar.&lt;/li&gt;
+                          &lt;/ol&gt;
+                      &lt;/section&gt;
+
+                      &lt;footer&gt;
+                          &lt;p&gt;¡Disfruta de tu deliciosa tarta de manzana!&lt;/p&gt;
+                      &lt;/footer&gt;
+                  &lt;/article&gt;
+
+                  &lt;article&gt;
+                      &lt;header&gt;
+                          &lt;h2&gt;Consejos para un Horneado Perfecto&lt;/h2&gt;
+                          &lt;p&gt;Publicado el &lt;time datetime="2025-04-28"&gt;28 de abril de 2025&lt;/time&gt; por Gemini&lt;/p&gt;
+                      &lt;/header&gt;
+                      
+                      &lt;section&gt;
+                          &lt;h3&gt;La Temperatura del Horno&lt;/h3&gt;
+                          &lt;p&gt;Asegúrate de precalentar el horno correctamente...&lt;/p&gt;
+                      &lt;/section&gt;
+
+                      &lt;section&gt;
+                          &lt;h3&gt;El Uso del Papel de Hornear&lt;/h3&gt;
+                          &lt;p&gt;El papel de hornear evita que tus preparaciones se peguen...&lt;/p&gt;
+                      &lt;/section&gt;
+                  &lt;/article&gt;
+              &lt;/main&gt;
+
+              &lt;footer&gt;
+                  &lt;p&gt;© 2025 Mi Blog de Cocina&lt;/p&gt;
+              &lt;/footer&gt;
+          &lt;/body&gt;
+          &lt;/html&gt;
+
+        </code>
+      </pre>
+    </p>
+  </section>
+
+  <section>
+    <h4>Atributes</h4>
+    <p>Los atributos son propiedades que se pueden agregar a las etiquetas HTML
+      para proporcionar información adicional sobre el contenido. Algunos
+      atributos comunes son:</p>
+
+    <section>
+      <h4>id=""</h4>
+      <p>para la etiqueta &lt;label&gt; se usa el atributo "for" para asociarlo
+        a una etiqueta &lt;input&gt; sin embargo este puede ser omitido
+        si el input se encuentra anidado dentro de label. Ejemplos:
+      </p>
+
+      <p>input sin anidar</p>
+      <pre>
+      <code>
+        &lt;label for="nombre"&gt;Nombre:&lt;/label&gt;
+        &lt;input type="text" id="nombre"&gt;
+      </code>
+    </pre>
+
+      <p>input anidado en label</p>
+      <pre>
+      <code>
+        &lt;label&gt;
+          Nombre:
+          &lt;input type="text"&gt;
+        &lt;/label&gt;
+      </code>
+    </pre>
+
+      <p>Los atributos "id" distinguen mayúsculas de minúsculas por eso
+        se debe tener cuidado al utilzarlos para poder ser llamados
+        correctamente entre código HTML, CSS o JavaScript. </p>
+    </section>
+
+    <section>
+      <h4>aria-lebelledby=""</h4>
+      <p>El atributo "aria-labelledby" se utiliza para asociar un elemento
+        con otro que actúa como su etiqueta. Esto es útil para mejorar la
+        accesibilidad de la página web, especialmente para los lectores de
+        pantalla. Por ejemplo:</p>
+      <pre>
+      <code>
+        &lt;label id="nombre-label"&gt;Nombre:&lt;/label&gt;
+        &lt;input type="text" aria-labelledby="nombre-label"&gt;
+      </code>
+    </pre>
+      <p>En este caso, el atributo "aria-labelledby" asocia el input con
+        la etiqueta "Nombre:". Esto significa que cuando un lector de
+        pantalla lee el input, también leerá la etiqueta asociada.</p>
+
+      <p>Hay más de 50 estados y propiedades de aria-* que se pueden usar 
+        para garantizar la accesibilidad. aria-labelledby, aria-describedby, 
+        aria-details y aria-owns toman como valor una lista de referencias 
+        id separada por espacios. aria-activedescendant, que identifica el 
+        elemento descendiente enfocado actualmente, toma como valor una sola 
+        referencia id: la del elemento único que tiene el enfoque (solo se 
+        puede enfocar un elemento a la vez).</p>
+    </section>
+
+  </section>
+
+</html>
