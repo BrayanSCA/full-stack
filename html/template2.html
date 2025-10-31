@@ -1,0 +1,37 @@
+<template id="perfil-template">
+  <style>
+    .perfil-card {
+      border: 1px solid #ccc;
+      padding: 16px;
+      border-radius: 8px;
+      background-color: #f9f9f9;
+    }
+    .perfil-card h3 {
+      color: #333;
+    }
+  </style>
+
+  <div class="perfil-card">
+    <h3>Nombre del usuario</h3>
+    <p>Descripción del usuario.</p>
+  </div>
+</template>
+
+<button id="crear-perfil">Crear Perfil</button>
+
+<script>
+  const template = document.getElementById('perfil-template');
+  const boton = document.getElementById('crear-perfil');
+
+  boton.addEventListener('click', ()=>{
+    //clona el contenido del template
+    const clon= template.content.cloneNode(true);
+    //agrega el contenido clonado al body de la pagina
+    document.body.appendChild(clon);
+  });
+</script>
+
+<!--  Explicación: El contenido dentro de la etiqueta <template> 
+  no se ve. Solo se activa cuando el botón es presionado, momento 
+  en que el código de JavaScript lo clona y lo inserta 
+  en la página. Es un molde que puedes usar infinitas veces. -->

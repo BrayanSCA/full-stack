@@ -1,0 +1,29 @@
+<!DOCTYPE hmtl>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Templates</title>
+  </head>
+  <body>
+    <h1>Templates, shadow DOM, slot...</h1>
+    <template id="star-rating-template">
+      <form action="">
+        <fieldset>
+          <slot name="star-rating-legend"><legend>Rate your experience:</legend></slot>
+          <rating>
+            <input type="radio" name="rating" value="1" aria-label="1 star"/>
+          </rating>
+        </fieldset>
+        <button type="reset">Reset</button>
+        <button type="submit">Enviar</button>
+      </form>
+    </template>
+    <star-rating>
+      <legend slot="star-rating-legend">Blendan</legend>
+    </star-rating>
+    <star-rating>
+      <legend slot="star-rating-legend">Hoover sukhdeep</legend>
+    </star-rating>
+    <script src="app.js"></script>
+  </body>
+</html>

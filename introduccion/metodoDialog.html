@@ -1,0 +1,124 @@
+<!DOCTYPE hmtl>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="" viewwport" content="witdh=device-widh, initial-scale=1.0">
+  <title>Dialogo y formnovalidate</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 20px;
+    }
+
+    dialog {
+      border: 2px solid #333;
+      border-radius: 8px;
+      padding: 20px;
+      background-color: #f9f9f9;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    dialog::backdrop {
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    button {
+      padding: 10px 20px;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+
+    input[type="text"],
+    input[type="email"] {
+      display: block;
+      margin-bottom: 10px;
+      padding: 5px;
+    }
+
+    h3 {
+      color: darkgreen;
+    }
+
+    p {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Dialogo y formnovalidate</h1>
+    <h2>Formulario con javaSript</h2>
+  </header>
+  <button id="abrirDialogo">Abrir Diálogo de Confirmación</button>
+
+  <dialog id="miDialogo">
+    <h3>Estás seguro de continuar?</h3>
+    <p>Este es un ejemplo de un diálogo interactivo.</p>
+
+    <form method="dialog">
+      <label for="nombre">Tu nombre (required): </label>
+      <input type="text" id="nombre" name="nombre" required>
+
+      <label for="email">Tu email (formato): </label>
+      <input type="email" id="email" name="email">
+
+      <button type="submit">Aceptar (con validación del form)</button>
+      <button type="submit" formnovalidate>Aceptar (sin validación)</button>
+      <button type="submit" value="cancelar">Cancelar</button>
+    </form>
+  </dialog>
+  <p>Estado del diálogo: <strong id="dialogoEstado">Cerrado</strong></p>
+  <hr>
+  <section>
+    <h2>Formulario sin JavaScript</h2>
+    <dialog open aria-labelledby="dialogid">
+      <form action="thankyou.php">
+        <button type="submit" aria-label="close" formmethod="dialog" formnovalidate>X</button>
+        <h2 id="dialogid">Application</h2>
+        <p>All fields are required</p>
+        <p>
+          <label>Name:
+            <input type="text" name="name" required />
+          </label>
+        </p>
+        <p>
+          <label>Warranty:
+            <input type="number" min="0" max="10" name="warranty" required />
+          </label>
+        </p>
+        <p>
+          <label>Power source:
+            <select name="powersoure">
+              <option>AC/DC</option>
+              <option>Battery</option>
+              <option>Solar</option>
+            </select>
+          </label>
+        </p>
+        <p>
+          <button type="submit" formmethod="post">Submit</button>
+        </p>
+      </form>
+    </dialog>
+  </section>
+  <script>
+    const miDialogo = document.getElementById('miDialogo');
+    const abrirDialogoBtn = document.getElementById('abrirDialogo');
+    const dialogoEstado = document.getElementById('dialogoEstado');
+
+    abrirDialogoBtn.addEventListener('click', () => {
+      miDialogo.showModal(); // Abre el diálogo como modal
+      dialogoEstado.textContent = 'Abierto';
+    });
+
+    //Escuchar el evento 'close' del diálogo
+    miDialogo.addEventListener('close', () => {
+      dialogoEstado.textContent = `Cerrado (Valor retornado: ${miDialogo.returnValue || 'ninguno'})`;
+      console.log('El diálogo se ha cerrado.');
+    });
+  </script>
+</body>
+
+</html>

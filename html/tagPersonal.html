@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Tag personalizado</title>
+</head>
+
+<body>
+  <perfil-usuario></perfil-usuario>
+  <perfil-usuario></perfil-usuario>
+  <perfil-usuario></perfil-usuario>
+
+  <script>
+    const template = document.createElement('template');
+    template.innerHTML = `
+      <div class="perfil-card">
+        <h3>Mi usuario</h3>
+        <p>Este es un elemento personalizado.</p>
+      </div>
+      `;
+
+    class PerfilUsuario extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        //Cuando la etiqueta <perfil-usuario> se carga en el
+        //HTML clona el contenido del template y lo adjunta
+        const clon = template.content.cloneNode(true);
+        this.appendChild(clon);
+      }
+    }
+
+    //Define la nueva etiqueta con el nombre 'perfil-usuario'
+    customElements.define('perfil-usuario', PerfilUsuario);
+  </script>
+  <!--Explicación: Con el código de JavaScript, le estamos 
+      diciendo al navegador "si ves una etiqueta 
+      <perfil-usuario>, por favor, crea una nueva instancia 
+      de la clase PerfilUsuario y usa su contenido". Es una 
+      forma de organizar y reutilizar código con una etiqueta 
+      con significado.-->
+</body>
+
+</html>

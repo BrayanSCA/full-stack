@@ -1,0 +1,38 @@
+<template id="ingreso-productos">
+  <style>
+    .producto {
+      border: 1px solid black;
+      padding: 15px;
+      border-radius: 6px;
+      background-color: aquamarine;
+      font-family: fantasy;
+    }
+
+    .producto h3 {
+      color: brown;
+    }
+  </style>
+
+  <div class="producto">
+    <h3>Información del producto</h3>
+    <p>Un texto para hacer relleno</p>
+    <label for="nombre-producto">Nombre producto: </label>
+    <input type="tex" name="nombre-producto" id="nombre-producto">
+    <br>
+    <label for="valor-producto">Valor producto: </label>
+    <input type="text" name="valor-producto" id="valor-producto">
+  </div>
+</template>
+<h1>Por favor presionar el botón para crear productos</h1>
+<hr>
+<button id="crear-producto">crear</button>
+
+<script>
+  const template = document.getElementById('ingreso-productos');
+  const boton = document.getElementById('crear-producto');
+
+  boton.addEventListener('click', () => {
+    const clon = template.content.cloneNode(true);
+    document.body.appendChild(clon);
+  });
+</script>

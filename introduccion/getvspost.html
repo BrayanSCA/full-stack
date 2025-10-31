@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>GET vs POST</title>
+        <style>
+            body { font-family: sans-serif; margin:20px;}
+            form {border: 1px solid #ccc; padding: 20px; margin-bottom: 20px;}
+            label, input { display: block; margin-bottom: 10px;}
+            input[type="submit"] { margin-top: 15px; padding: 8px 15px;}
+            h3 { color: navy;}
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1>GET vs POST (visibilidad de datos)</h1>
+        </header>
+        <main>
+            <h3>formulario con método GET</h3>
+            <form action="https://www.exemple.com/search" method="GET">
+                <label for="busqueda_get">Término de búsqueda (GET):</label>
+                <input type="text" id="busqueda_get" name="q" value="hola mundo" required>
+                <input type="submit" value="Enviar con GET">
+            </form>
+            <p>Observar la URL después de enviar el formulario.</p>
+            <hr>
+            <h3>formulario con método POST</h3>
+            <form action="https://www.exemple.com/login" method="POST">
+                <label for="usuario_post">Usuario (POST):</label>
+                <input type="text" id="usuario_post" name="username" value="mi_usuario" required>
+                <label for="clave_post">Contraseña (POST):</label>
+                <input type="password" id="clave_post" name="password" value="mi_clave" requiered>
+                <input type="submit" value="Enviar con POST">
+            </form>
+            <p>Oberservar que la URL NO cambia con este formulario (aunque el navegador te redirija a exemple.com)</p>
+        </main>
+        <section></section>
+    </body>
+</html>

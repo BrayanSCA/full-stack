@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UFT-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notificación</title>
+</head>
+
+<body>
+  <h1>Proyecto 2: Alerta de notificación reutilizable</h1>
+  <fieldset>
+    <legend><strong>Objetivo:</strong> construir un componente
+      de alerta que se pueda cerrar al hacer clic en un botón.</legend>
+    <ul>
+      <li>Crea un elemento personalizado &lt;custom-alert&gt;</li>
+      <li>Usa el "Shadow DOM" para encapsular un HTML que contenga
+        un mensaje de texto, un icono o span para el texto y un
+        botón de cerrar.
+      </li>
+      <li>En la clase de tu elemento, agrega un EventListener al
+        botón de "cerrar". Cuando se haga clic, el evento debe eliminar
+        el elemento (this.remove()) de la pagina.
+      </li>
+      <li>Incluye estilos en el shadow DOM para diferentes tipos de
+        alertas (éxito, error, advertencia) basándote en un atributo,
+        por ejemplo, &lt;custom-alert type="success"
+      </li>
+    </ul>
+  </fieldset>
+
+  <template id="template-notification">
+    <style>
+      .alert-error {
+        border: 3px solid red;
+        background-color: lightgray;
+        color: #333;
+        margin: 10px;
+        padding: 5px;
+      }
+
+      .alert-welcome {
+        border: 3px solid green;
+        background-color: lightgoldenrodyellow;
+        color: #333;
+        margin: 10px;
+        padding: 5px;
+      }
+
+      .alert-warning {
+        border: 3px solid yellow;
+        background-color: lightgray;
+        color: #333;
+        margin: 10px;
+        padding: 5px;
+      }
+
+      .alert-msg {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .bt-close {
+        cursor: pointer;
+        margin-left: auto;
+      }
+    </style>
+
+    <div class="alert-msg">
+      <p class="text-alert"></p>
+      <img class="img-alert" src="" width="80px" />
+      <button class="bt-close">Cerrar</button>
+    </div>
+
+  </template>
+
+  <button id="show-alert">Mostrar alertas</button>
+
+  <script>
+    //datos de cada alerta
+      const alertDatas = [
+        {type: 'error', src: 'alerta.png', text: 'Este es un mensaje de error.'},
+        {type: 'bienvenido', src: 'alerta.png', text: 'Este es un mensaje de binvenida.'},
+        {type: 'precaucion', src: 'alerta.png', text: 'Este es un mensaje de precaución.'}
+      ];
+
+    //rastrear alertas visibles
+      let visibleAlerts= [];
+
+    class Notificacion extends HTMLElement {
+      constructor() {
+        super();
+        this.attachShadow({ mode: 'open' });
+      }
+
+      connectedCallback() {
+        const template = document.getElementById('template-notification');
+        const clon = template.content.cloneNode(true); //siempre va variableTemplate.content.cloneNode(true);
+        const btClose = clon.querySelector('.bt-close');
+        const iconAlert = this.getAttribute('src');
+        const textAlert = this.getAttribute('text');
+        const typeAlert = this.getAttribute('type');
+        const img = clon.querySelector('.img-alert');
+        const text = clon.querySelector('.text-alert');
+        const container = clon.querySelector('.alert-msg');
+
+        //lógica estilos según tipo de alerta
+        if (typeAlert === 'error') {
+          container.classList.add('alert-error');
+        } else if (typeAlert === 'bienvenido') {
+          container.classList.add('alert-welcome');
+        } else if (typeAlert === 'precaucion') {
+          container.classList.add('alert-warning');
+        }
+
+        //lógica asignación de datos
+        img.src = iconAlert;
+        text.textContent = textAlert;
+
+        //adjuntar al Shadow
+        this.shadowRoot.appendChild(clon);
+
+        //cerrar alerta
+        btClose.addEventListener("click", () => {
+          //la función flecha => mantiene el "this." del componente
+          //Crear y disparar un evento personalizado
+          const eventClose = new CustomEvent('alert-closed', {
+            bubbles: true,
+            composed: true,
+            detail: {type: this.getAttribute('type')}
+          });
+          this.dispatchEvent(eventClose);
+          this.remove(); //El componente se elimina a si mismo
+        });
+      }
+    }
+
+    const showAlert = document.getElementById('show-alert');
+    showAlert.addEventListener('click', () => {
+      
+      if (visibleAlerts.length > 0) {
+        return;
+      }
+
+      //por cada objeto en el arreglo de datos, creamos una alerta
+      alertDatas.forEach(alertData => {
+        const newAlert = document.createElement('custom-alert');
+        newAlert.setAttribute('type', alertData.type);
+        newAlert.setAttribute('src', alertData.src);
+        newAlert.setAttribute('text', alertData.text);
+        document.body.appendChild(newAlert);
+        visibleAlerts.push(newAlert);
+      });
+
+      showAlert.disabled = true; //deshabilitar boton
+    });
+
+    customElements.define('custom-alert', Notificacion);
+
+    //Escuchar el evento de cierre en un elemento padre (el body)
+    document.body.addEventListener('alert-closed', (event)=> {
+      //Obtener el tipo de alerta del evento
+      const typeClosed = event.detail.type;
+
+      //Filtrar el arreglo para eliminar la alerta que se cerró
+      visibleAlerts = visibleAlerts.filter(alerta =>
+        alerta.getAttribute('type') !== typeClosed
+      );
+
+      //Si no hy más alertas visibles, habilita el boton mostrar
+      if (visibleAlerts.length === 0) {
+        showAlert.disabled = false;
+      }
+    });
+</script>
+</body>
+
+</html>

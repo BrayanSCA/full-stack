@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tarjeta Producto</title>
+</head>
+
+<body>
+  <h1>Proyecto 1: Tarjeta de producto dinámica</h1>
+  <fieldset>
+    <legend>
+      <p><strong>Objetivo:</strong> crear un componente de tarjeta de
+        producto que muestre la información a partir de los atributos
+        de la etiqueta.</p>
+    </legend>
+    <ul>
+      <li>
+        Crea una etiqueta &lt;tarjeta-producto&gt; con atributos
+        como img-src, titulo y precio.
+      </li>
+      <li>
+        Define la estructura y los estilos de la tarjeta usando
+        un &lt;template&gt; y el Shadow DOM.
+      </li>
+      <li>
+        En el JavaScript, crea una clase par tu elemento personalizado.
+      </li>
+      <li>
+        Usa el método connectedCallback() para leer los atributos
+        ( this.getAttribute('titulo')) y rellenar dinámicamente
+        el HTML dentro del Shadow DOM.
+      </li>
+    </ul>
+  </fieldset>
+
+  <tarjeta-producto
+    img-src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1J1Eq_yLphGoJhP8F5ryDWS6y1oo4bZqY5g&s"
+    titulo="Producto Increíble" 
+    precio="$99,99">
+  </tarjeta-producto>
+
+  <tarjeta-producto 
+    img-src="https://images.unsplash.com/photo-1593642702821-c8da6771f0c6" 
+    titulo="Laptop de Alta Gama" 
+    precio="$1200.00">
+  </tarjeta-producto>
+
+  <tarjeta-producto 
+    img-src="https://www.digitalresponse.es/wp-content/uploads/2020/05/campa%C3%B1as_reposicion_de_producto.jpg" 
+    titulo="Cajas envíos" 
+    precio="$80.00">
+  </tarjeta-producto>
+
+  <template id="product-card-template">
+    <style>
+      .product-card {
+        border: 3px solid #00ff00;
+        padding: 20px;
+        background-color: #554455;
+        font-family: monospace;
+      }
+
+      .product-card img {
+        width: 100px;
+      }
+
+      .product-card p {
+        margin-top: 5px;
+      }
+    </style>
+
+    <div class="product-card">
+      <h3 class="card-title"></h3>
+      <img class="card-img" src="" alt=""/>
+      <p class="card-price"></p>
+    </div>
+  </template>
+
+  <script>
+    class ProductCard extends HTMLElement {
+      constructor() {
+        super(); //obligatorio
+        this.attachShadow({ mode: 'open' }); //crea el shadow DOM
+      }
+
+      connectedCallback() {
+        const template = document.getElementById('product-card-template');
+        const content = template.content.cloneNode(true);
+
+        //obtener los atributos
+        const imgSrc = this.getAttribute('img-src');
+        const titulo = this.getAttribute('titulo');
+        const precio = this.getAttribute('precio');
+
+        //encontrar los elementos dentro del Shadow
+        const imgElement = content.querySelector('.card-img');
+        const titleElement = content.querySelector('.card-title');
+        const cardPrice = content.querySelector('.card-price');
+
+        //Rellenar los datos
+        imgElement.src = imgSrc;
+        titleElement.textContent = titulo;
+        cardPrice.textContent = precio;
+
+        //adjuntar al shadow DOM
+        this.shadowRoot.appendChild(content);
+      }
+    }
+
+    //Asociar la etiqueta personalizada con la clase
+    customElements.define('tarjeta-producto', ProductCard);
+  </script>
+</body>
+
+</html>

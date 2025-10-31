@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ejercicio 5</title>
+</head>
+
+<body>
+  <h1>Ejercicio 5: Estructura compleja y semántica</h1>
+  <fieldset>
+    <legend><strong>Objetivo: </strong>Construir el esqueleto de
+      una página web compleja utilizando <strong>solamente HTML semántico
+        (sin CSS), que simule un diseño de tres columnas.</strong></legend>
+    <ul>
+      <li>Crea un nuevo archivo llamado "ejercicios5.html</li>
+      <li>Dentro del &lt;body&gt;, utiliza etiquetas semánticas para definir
+        las secciones principales de una página: header, nav, main,
+        article, section, aside y footer.
+      </li>
+      <li>El header debe contener un encabezado &lt;h1&gt; y un subtítulo &lt;p&gt;</li>
+      <li>Dentro de la etiqueta &lt;main&gt;, crea una estructura que
+        simule un diseño de tres columnas. Esto se puede lograr anidando
+        etiquetas como &lt;div&gt; o incluso usando una tabla para la
+        maquetación.
+        <ul>
+          <li>La columna de la izquierda podría ser un &lt;article&gt;.</li>
+          <li>La columna del centro podría ser una &lt;section&gt;.</li>
+          <li>La columna de la derecha podría ser un &lt;aside&gt;.</li>
+        </ul>
+      </li>
+      <li>Dentro de cada una de estas columnas (&lt;article&gt;, &lt;section&gt;,
+        &lt;aside&gt;), añade encabezados, párrafos y listas.
+      </li>
+      <li>Añade un &lt;footer&gt; con información de derechos de autor y algún
+        enlace adicional.
+      </li>
+    </ul>
+  </fieldset>
+  <header>
+    <h1>Mi primer página web</h1>
+    <p>ya casi estamos listos!</p>
+    <nav>
+      <a href="#">Quienes somos?</a>
+      <a href="#">Contacto</a>
+      <a href="#">Registro</a>
+      <a href="#">PQR</a>
+    </nav>
+  </header>
+  <hr>
+  <main>
+    <table>
+      <thead>
+        <tr>
+          <th>&lt;article&gt;</th>
+          <th>&lt;section&gt;</th>
+          <th>&lt;aside&gt;</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <ul>
+              <li>
+                <figure>
+                  <img src="/ingles.jpg" alt="persona estudiando inglés" width="80px" />
+                  <figcaption>
+                    <a href="#">Curso de inglés para programadores!</a>
+                  </figcaption>
+                </figure>
+              </li>
+              <li>
+                <figure>
+                  <img src="/recetas.jpg" alt="receta de camarones" width="80px" />
+                  <figcaption>
+                    <a href="#">Recetas nuevas</a>
+                  </figcaption>
+                </figure>
+              </li>
+              <li>
+                <figure>
+                  <img src="/comentarios.png" alt="icono comentarios" width="80px" />
+                  <figcaption>
+                    <a href="#">Comentarios</a>
+                  </figcaption>
+                </figure>
+              </li>
+            </ul>
+
+          </td>
+          <td>
+            <h2>Noticias</h2>
+            <img src="/ingles.jpg" alt="persona estudiando inglés" width="300px" />
+            <h2>Curso de inglés para programadores!</h2>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Molestiae, officia quisquam delectus nisi
+              accusamus expedita animi ad nesciunt quod quae aliquid, sapiente voluptates quam error asperiores maiores
+              earum. Voluptates, tenetur!
+              Voluptatibus quam iusto in, neque sint soluta nobis quidem, illum earum commodi alias esse praesentium?
+              Necessitatibus, culpa! Aperiam autem officiis repudiandae impedit? Nesciunt sit sequi voluptas?
+              Necessitatibus sit consequatur voluptas?
+              Esse a recusandae autem corrupti ipsum animi dignissimos perspiciatis neque sit unde delectus cupiditate
+              consequatur facilis illum, ratione ipsa eos iusto reprehenderit harum assumenda soluta nobis. Fugiat
+              excepturi adipisci eum.</p>
+          </td>
+          <td>
+            <ul>
+              <li><a href="#">Inicio</a></li>
+              <li><a href="#">Noticias</a></li>
+              <li><a href="#">Recetas</a></li>
+              <li><a href="#">Comentarios</a></li>
+            </ul>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </main>
+  <hr>
+  <footer>
+    <a href="#">Inicio</a>
+    <a href="#">Email</a>
+    <a href="https://web.dev/?hl=es-419">Curso HTML</a>
+    <p>dirección: calle 3 # 3 - 33, cali, valle - colombia</p>
+    <p>teléfono: 333 333 33 33</p>
+    <p>&copy; Todos los derechos reservados</p>
+  </footer>
+</body>
+
+</html>

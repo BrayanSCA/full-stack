@@ -1,0 +1,146 @@
+Ejercicio 2: El método DIALOG y formnovalidate
+Este ejercicio te permitirá interactuar con el método dialog y ver cómo afecta la validación.
+
+Crea el archivo ejercicio2.html:
+
+HTML
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 2: Método DIALOG y formnovalidate</title>
+    <style>
+        body { font-family: sans-serif; margin: 20px; }
+        dialog {
+            border: 2px solid #333;
+            border-radius: 8px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        dialog::backdrop {
+            background-color: rgba(0,0,0,0.5);
+        }
+        button { padding: 10px 20px; margin-top: 10px; cursor: pointer; }
+        input[type="text"], input[type="email"] { display: block; margin-bottom: 10px; padding: 5px; }
+        h3 { color: darkgreen; }
+        p { margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h1>Método DIALOG y validación</h1>
+
+    <button id="abrirDialogo">Abrir Diálogo de Confirmación</button>
+
+    <dialog id="miDialogo">
+        <h3>¿Estás seguro de continuar?</h3>
+        <p>Este es un ejemplo de un diálogo interactivo.</p>
+
+        <form method="dialog">
+            <label for="nombre">Tu nombre (requerido):</label>
+            <input type="text" id="nombre" name="nombre" required>
+
+            <label for="email">Tu email (formato):</label>
+            <input type="email" id="email" name="email">
+
+            <button type="submit">Aceptar (con validación del form)</button>
+            <button type="submit" formnovalidate>Aceptar (sin validación)</button>
+            <button type="submit" value="cancelar">Cancelar</button>
+        </form>
+    </dialog>
+
+    <p>Estado del diálogo: <strong id="dialogoEstado">Cerrado</strong></p>
+
+    <script>
+        const miDialogo = document.getElementById('miDialogo');
+        const abrirDialogoBtn = document.getElementById('abrirDialogo');
+        const dialogoEstado = document.getElementById('dialogoEstado');
+
+        abrirDialogoBtn.addEventListener('click', () => {
+            miDialogo.showModal(); // Abre el diálogo como modal
+            dialogoEstado.textContent = 'Abierto';
+        });
+
+        // Escuchar el evento 'close' del diálogo
+        miDialogo.addEventListener('close', () => {
+            dialogoEstado.textContent = `Cerrado (Valor retornado: ${miDialogo.returnValue || 'ninguno'})`;
+            console.log('El diálogo se ha cerrado.');
+        });
+
+        // Opcional: Escuchar el evento 'submit' del formulario dentro del diálogo
+        miDialogo.querySelector('form').addEventListener('submit', (event) => {
+            console.log('Evento de submit del formulario dentro del diálogo disparado.');
+            // Aquí podrías hacer algo con los datos si no quieres enviarlos al servidor
+            // event.preventDefault(); // Si quieres evitar que se cierre automáticamente, descomenta esto
+        });
+    </script>
+</body>
+</html>
+Instrucciones:
+
+Abre ejercicio2.html.
+Haz clic en "Abrir Diálogo de Confirmación".
+Prueba la validación: Deja el campo "Tu nombre" vacío y haz clic en el primer botón "Aceptar (con validación del form)". El navegador no te dejará enviar el formulario y te pedirá que completes el campo.
+Ahora, borra el contenido del campo "Tu nombre" nuevamente. Haz clic en el segundo botón "Aceptar (sin validación)". ¿Qué sucede? El diálogo se cierra, ignorando la validación del campo requerido. Esto se debe a formnovalidate.
+Vuelve a abrir el diálogo. Ingresa un email sin formato válido (ej: hola) y haz clic en "Aceptar (con validación)". Verás el mensaje de error del navegador. Luego, intenta con el botón "Aceptar (sin validación)".
+Haz clic en "Cancelar". El diálogo se cierra, pero no hay validación ni envío de datos.
+Ejercicio 3: Prioridad de los atributos del botón (formaction, formmethod, etc.)
+Este ejercicio te mostrará cómo los atributos de un botón de envío pueden sobreescribir los atributos definidos en la etiqueta <form>.
+
+Crea el archivo ejercicio3.html:
+
+HTML
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 3: Prioridad de atributos de botón</title>
+    <style>
+        body { font-family: sans-serif; margin: 20px; }
+        form { border: 1px solid #ddd; padding: 20px; background-color: #f0f0f0; }
+        label, input { display: block; margin-bottom: 10px; }
+        button { padding: 10px 15px; margin-right: 10px; cursor: pointer; }
+        h3 { color: purple; }
+    </style>
+</head>
+<body>
+    <h1>Prioridad de Atributos del Botón</h1>
+
+    <h3>Formulario de Pruebas</h3>
+    <form id="miFormulario" action="https://www.example.com/default_action" method="GET">
+        <label for="datoPrincipal">Dato Principal:</label>
+        <input type="text" id="datoPrincipal" name="mainData" value="Información por defecto">
+
+        <p><strong>Configuración del FORM principal:</strong></p>
+        <ul>
+            <li>`action="https://www.example.com/default_action"`</li>
+            <li>`method="GET"`</li>
+        </ul>
+
+        <button type="submit">Enviar (Usa configuración del FORM)</button>
+        <button type="submit" formaction="https://www.example.com/special_action" formmethod="POST">
+            Enviar a "special_action" con POST
+        </button>
+        <button type="submit" formnovalidate>
+            Enviar (Sin validación)
+        </button>
+        <button type="submit" formaction="https://www.example.com/another_action" formtarget="_blank">
+            Enviar a "another_action" en nueva pestaña
+        </button>
+    </form>
+
+    <p><strong>Observa la URL y la apertura de nuevas pestañas al hacer clic en los diferentes botones.</strong></p>
+</body>
+</html>
+Instrucciones:
+
+Abre ejercicio3.html.
+Botón 1 ("Enviar (Usa configuración del FORM)"): Haz clic. Verás que la URL cambia a https://www.example.com/default_action?mainData=Informaci%C3%B3n+por+defecto. Usa la acción y el método definidos en el <form>.
+Botón 2 ("Enviar a "special_action" con POST"): Haz clic. La URL cambiará a https://www.example.com/special_action. Observa que el método es POST, por lo que los datos no aparecen en la URL, y se sobreescribió la acción y el método del <form>.
+Botón 3 ("Enviar (Sin validación)"): Si el campo "Dato Principal" tuviera required, este botón lo ignoraría. Por simplicidad no lo tiene aquí, pero el punto es que si hubiera una validación, este botón la ignoraría.
+Botón 4 ("Enviar a "another_action" en nueva pestaña"): Haz clic. ¿Qué sucede? Se abre una nueva pestaña o ventana con la URL https://www.example.com/another_action, y los datos se envían allí. Se sobreescribió el target y el action del <form>.
+¡Espero que estos ejercicios te sean de gran ayuda para solidificar tu conocimiento! La clave es experimentar y observar los resultados.

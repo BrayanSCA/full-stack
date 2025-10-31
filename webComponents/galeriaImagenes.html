@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Galería de imágenes</title>
+</head>
+
+<body>
+  <h1>Proyecto 3: Galería de imágenes plegable.</h1>
+  <fieldset>
+    <legend><strong>Objetivo: </strong>crear un
+      componente &lt;expandable-gallery&gt; que muestre
+      miniaturas de imágenes y que, al hacer clic en una,
+      la expanda para mostrarla a tamaño completo.></label></legend>
+    <ul>
+      <li>Crea la clase para el elemento personalizado
+        &lt;expandable-gallery&gt;.
+      </li>
+      <li>Usa el Shadow DOM y una etiqueta &lt;template&gt;
+        para definir la estructura de la galería (un contenedor
+        para las miniaturas y otro para la imagen grande).
+      </li>
+      <li>En el connectedCallback(), usa JavaScript para:
+        <ul>
+          <li>Detectar todas las miniaturas dentro del componente.</li>
+          <li>Añadir un click eventListener a cada miniatura.</li>
+          <li>Cuando se haga clic en una miniatura, cambiar el
+            src de la imagen grande para que muestre la versión
+            completa.
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </fieldset>
+  
+  <h2 class="gallery-title">Galería de imágenes</h2>
+
+  <image-gallery></image-gallery>
+
+  <template id="gallery-template">
+    <style>
+      .gallery-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+        padding: 20px;
+      }
+
+      .thumbnail {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        border: 2px solid transparent;
+        transition: border-color 0.2s;
+        cursor: pointer;
+      }
+
+      .thumbnail:hover {
+        border-color: purple;
+      }
+    </style>
+
+    <div class="gallery-container"></div>
+
+  </template>
+
+  <template id="viewer-template">
+    <style>
+      .viewer-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.9);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+      }
+
+      .viewer-content {
+        position: relative;
+      }
+
+      .viewer-img {
+        max-width: 90vw;
+        max-height: 90vh;
+        border: 3px solid white;
+      }
+
+      .viewer-close-btn {
+        position: absolute;
+        top: -15px;
+        right: -15px;
+        background-color: white;
+        color: black;
+        border: 1px solid black;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+        font-weight: bold;
+      }
+    </style>
+
+    <div class="viewer-overlay">
+      <div class="viewer-content">
+        <img class="viewer-img" src="" alt="">
+        <button class="viewer-close-btn">X</button>
+      </div>
+    </div>
+
+  </template>
+
+  <script>
+    const dataImages = [
+      { src: 'recetas.jpg', alt: 'imagen de un plato con una receta de camarones' },
+      { src: 'ingles.jpg', alt: 'programador aprendiendo inglés' },
+      { src: 'comentarios.png', alt: 'cuadros de dialogo' }
+    ];
+
+    class ImageGallery extends HTMLElement {
+      constructor() { //crear e inicializar objetos
+        super(); //llama al consturctor
+        this.attachShadow({ mode: 'open' });
+        const template = document.getElementById('gallery-template');
+        this.shadowRoot.appendChild(template.content.cloneNode(true));
+      }
+
+      connectedCallback() {
+        //t
+        const galleryContainer = this.shadowRoot.querySelector('.gallery-container');
+
+        //lógica imágenes miniatura
+        dataImages.forEach(imgData => {
+          const img = document.createElement('img');
+          img.src = imgData.src;
+          img.alt = imgData.alt;
+          img.classList.add('thumbnail');
+
+          img.addEventListener('click', () => {
+            //crear y añadir el componente del visor de imágenes al hacer click
+            const viewer = document.createElement('image-viewer');
+            viewer.setAttribute('src', imgData.src);
+            viewer.setAttribute('alt', imgData.alt);
+            document.body.appendChild(viewer);
+          });
+
+          galleryContainer.appendChild(img);
+        });
+      }
+    }
+
+    //Agregar clase a la etiqueta personalizada
+    customElements.define('image-gallery', ImageGallery);
+
+
+    class ImageViewer extends HTMLElement {
+      constructor() {
+        super();
+        this.attachShadow({ mode: 'open' });
+        const template = document.getElementById('viewer-template');
+        this.shadowRoot.appendChild(template.content.cloneNode(true));
+      }
+
+      connectedCallback() {
+        const imgSrc = this.getAttribute('src');
+        const imgAlt = this.getAttribute('alt');
+        const closeBtn = this.shadowRoot.querySelector('.viewer-close-btn');
+        const img = this.shadowRoot.querySelector('.viewer-img');
+
+        img.src = imgSrc;
+        img.alt = imgAlt;
+
+        closeBtn.addEventListener('click', () => {
+          this.remove(); //Elimina el componente del DOM
+        })
+      }
+    }
+
+    customElements.define('image-viewer', ImageViewer);
+  </script>
+</body>
+
+</html>

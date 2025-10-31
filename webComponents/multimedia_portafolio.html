@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta chaset="UTF-8">
+  <meta name="charset" content="width=device-width, initial-scale=1.0">
+  <title>Ejercicio 6</title>
+</head>
+
+<body>
+  <h1>Ejercicio 6: Portafolio de multimedia</h1>
+  <fieldset>
+    <legend><strong>Objetivo:</strong> Crear una galería multimedia
+      que combine imágenes, video y audio, demostrando un uso correcto de las
+      etiquetas y sus atributos.</legend>
+    <ul>
+      <li>Crea un archivo llamado "multimedia_portafolio.html</li>
+      <li>Utiliza una etiqueta &lt;main&gt; para el contenido principal y un
+        encabezado &lt;h1&gt; con el título "Mi Portafolio Multimedia".
+      </li>
+      <li>Inerta una imagen usando la etiqueta &lt;img&gt;. No olvides los
+        atributos src (la ruta a la imagen) y alt (texto alternativo).
+      </li>
+      <li>Debajo de la imagen, usa las etiquetas &lt;figure&gt; y
+        &lt;figcaption&gt; para agregar una descripción a tu imagen. Esto
+        demuestra un conocimiento de la semántica HTML.
+      </li>
+      <li>Añade un video usando a etiqueta &lt;video&gt;. El video debe tener
+        controles (controls) y reproducirse automáticamente (autoplay) y en
+        bucle (loop).
+      </li>
+      <li>Añade una pista de audio usando la etiqueta &lt;audio&gt; con controles.</li>
+      <li>Utiliza un &lt;footer&gt; para colocar de contacto un texto de
+        derechos de autor.
+      </li>
+    </ul>
+  </fieldset>
+  <header>
+    <h1>Mi Portafolio Multimedia</h1>
+  </header>
+  <main>
+    <figure>
+      <img src="ingles.jpg" alt="programador frente al computador estudiando inglés"
+      width="300px">
+      <figcaption>Mejora tus habilidades de inglés!</figcaption>
+    </figure>
+    <hr>
+    <figure>
+      <video src="video1.mp4" width="300px" poster="/ingles.jpg"
+      controls autoplay loop></video>
+      <figcaption>Mira como lo hacemos!</figcaption>
+    </figure>
+    <hr>
+    <audio src="aindaChorei.MP3" controls></audio>
+  </main>
+  <hr>
+  <footer>
+    &copy; Todos los derechos reservados.
+  </footer>
+</body>
+
+</html>

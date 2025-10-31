@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Barra de Progreso</title>
+</head>
+
+<body>
+  <h1>Web Components, Proyecto 5: Barra de progreso personalizada.</h1>
+  <fieldset>
+    <legend><strong>Objetivo: </strong>Crear un componente que
+      muestre una barra de progreso. La barra debe actualizarse
+      dinámicamente según un atributo.</legend>
+    <ul>
+      <li>HTML: &lt;custom-progress-bar progress="50"&gt; </li>
+      <li>Conceptos a practicar:
+        <ul>
+          <li>Uso del constructor() y el connectedCallback()
+            para inicializar el componente.
+          </li>
+          <li>Uso de atributos para pasar datos al componente.</li>
+          <li>Manejo de estilos dinámicos en el Shadow DOM
+            (puedes usar variables CSS o modificar el width
+            directamente con JavaScript).
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </fieldset>
+  <custom-progress-bar progress="50"></custom-progress-bar>
+  <template id="template-progress">
+    <style>
+      .content-background {
+        width: 800px;
+        height: 300px;
+        margin: 20px auto;
+        /*centra el componente*/
+        background: url(img/background-forest.png) no-repeat center center;
+        background-size: cover;
+        /*cubre el hancho sin repetirse*/
+        position: relative;
+        /*para posicionar los demas elementos*/
+        overflow: hidden;
+        /*oculta partes de imagen que se salgan del fondo*/
+        border: 5px solid #333;
+        /*Borde tipo juego*/
+        border-radius: 10px;
+      }
+
+      .health-info-box {
+        position: absolute;
+        top: 20px;
+        /*posicionar arriba*/
+        left: 50%;
+        transform: translateX(-50%);
+        /*centrar la caja de vida*/
+        background-color: white;
+        border: 3px solid #333;
+        border-radius: 8px;
+        padding: 5px 15px;
+        display: flex;
+        /*para alinear nombre, icono y barra*/
+        align-items: flex-start;
+        gap: 5px;
+        width: 300px;
+        /*ancho de la caja*/
+      }
+
+      .content-bar {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        width: 100%;
+      }
+
+      progress {
+        flex-grow: 1;
+        /*permite que la barre ocupe el espacio restante*/
+        height: 18px;
+        appearance: none;
+        /*evita estilos por defecto*/
+      }
+
+      /*chrome, safari, edge*/
+      progress::-webkit-progress-bar {
+        background-color: #ddd;
+        border-radius: 5px;
+      }
+
+      progress::-webkit-progress-value {
+        background-color: var(--progress-color, blue);
+        /*valor dinámico*/
+        border-radius: 5px;
+      }
+
+      /*firefox*/
+      progress::-moz-progress-bar {
+        background-color: var(--progress-color, blue);
+        /*valor dinámico*/
+      }
+
+      .pokemon-img {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%) translateY(20px);
+        /*centra y sube 20px*/
+        width: 250px;
+      }
+
+      .pokemon-name {
+        font-weight: bold;
+        font-size: 1.2em;
+        color: #333;
+      }
+
+      .controls-input {
+        width: 800px;
+        margin: 10px auto;
+        text-align: center;
+        position: relative;
+        z-index: 10;
+        /*asegura que el input esté visible*/
+      }
+    </style>
+    <div class="content-background">
+      <div class="health-info-box">
+        <span class="pokemon-name">Charmander</span>
+        <div class="content-bar">
+          <label for="life">&#129655;</label>
+          <progress id="life" min="0" max="100" value=""></progress>
+        </div>
+      </div>
+      <img class="pokemon-img" src="img/charmander.png">
+    </div>
+    <div class="controls-input">
+      <label for="head-points">Cantidad vida: </label>
+      <input type="number" id="head-points" />
+      <button class="btn-vida">Enviar</button>
+    </div>
+  </template>
+  <script>
+    class BarProgress extends HTMLElement {
+      constructor() {
+        super();
+        this.attachShadow({ mode: 'open' });
+        const template = document.getElementById('template-progress');
+        this.shadowRoot.appendChild(template.content.cloneNode(true));
+        this.currentValue = 0;
+      }
+
+      connectedCallback() {
+        const barProgress = this.shadowRoot.querySelector('progress');
+        const inputHeadPoints = this.shadowRoot.querySelector('#head-points');
+        const btnVida = this.shadowRoot.querySelector('.btn-vida');
+        const initialValue = parseInt(this.getAttribute('progress') || '0', 10);
+        this.currentValue = initialValue;
+        inputHeadPoints.value = this.currentValue;
+
+        const updateProgressColor = (value) => {
+          let color = 'blue';
+          if (value > 70 && value <= 100) { color = 'blue'; }
+          else if (value > 40 && value <= 70) { color = 'green'; }
+          else if (value >= 0 && value <= 40) { color = 'red'; }
+          else {
+            alert('El valor debe estar entre 0 y 100');
+            return 'black';
+          }
+          return color;
+        }
+
+        const updateBar = (value) => {
+          const numericValue = parseInt(value, 10);
+          if (isNaN(numericValue) || numericValue < 0 || numericValue > 100) {
+            alert('Valor no válido. Debe ser un número entre 0 y 100.');
+            return;
+          }
+          this.currentValue = numericValue;
+          barProgress.value = numericValue;
+        }
+        updateBar(this.currentValue);
+
+        btnVida.addEventListener('click', () => {
+          updateBar(inputHeadPoints.value);
+        });
+      };
+    }
+
+    customElements.define('custom-progress-bar', BarProgress);
+  </script>
+</body>
+
+</html>

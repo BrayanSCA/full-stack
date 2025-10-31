@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+  <h1>Ejemplo shadow DOM</h1>
+  <hr>
+  <perfil-usuario></perfil-usuario>
+  <script>
+    class PerfilUsuario extends HTMLElement {
+      constructor() {
+        super();
+        //Crea un shadow DOM para este elemento
+        this.attachShadow({ mode: 'open' });
+      }
+
+      connectedCallback() {
+        //Definimos el contenido (HTML + CSS) aquí
+        this.shadowRoot.innerHTML = `
+          <style>
+            .perfil-card {
+            border: 2px solid #007bff;
+            padding: 16px;
+            border-radius: 8px;
+            background-color: #e9f5ff;
+            font-familiy: sans-serif;
+            }
+
+            .perfil-card h3 {
+            color: #004085;
+            }
+
+          </style>
+
+          <div class="perfil-card">
+            <h3>Usuario</h3>
+            <p>Contenido aislado del shadow DOM.</p>
+          </div>
+          `;
+      }
+    }
+    customElements.define('perfil-usuario', PerfilUsuario);
+  </script>
+  <!--Explicación: Observa que el style y el div ahora están 
+  dentro de shadowRoot.innerHTML. Esto hace que el estilo 
+  solo se aplique dentro del componente <perfil-usuario>. 
+  Si tuvieras otro h3 en tu página, no se vería afectado 
+  por este estilo azul. El Shadow DOM garantiza que el 
+  componente es totalmente independiente.-->
+</body>
+
+</html>

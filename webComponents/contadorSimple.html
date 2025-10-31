@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Contador Simple</title>
+  </head>
+  <body>
+    <h1>Proyecto 4: Contador Simple</h1>
+    <fieldset>
+      <legend><strong>Objetivo: </strong>construir un componente
+      &lt;simple-counter&gt; que muestre un número y tenga dos
+    botones para incrementarlo y decrementarlo.</legend>
+    <ul>
+      <li>Crear la clase para el elemento personalizado 
+        &lt;simple-counter&gt;</li>
+      <li>Usa el shadow DOM y una &lt;template&gt; para la
+        estructura: un párrafo para el número y dos botones + y -.
+      </li>
+      <li>En el constructor() inicializa una variable 
+        "this.count" a 0.</li>
+      <li>En el connectedCallback():
+        <ul>
+          <li>Selecciona los botones del shadow DOM</li>
+          <li>Añade un click eventListener a cada botón.</li>
+          <li>Dentro de cada listener, atualiza el valor de
+            this.count y luego actualiza el textContent del párrafo
+            con el nuevo número.Esto te enseñará a manejar el estado
+            de un componente.
+          </li>
+        </ul>
+      </li>
+    </ul>
+    </fieldset>
+
+    <h2>Contador</h2>
+    <simple-counter></simple-counter>
+
+    <template id="counter-template">
+      <style>
+        .counter-container {
+          border: 2px solid rgba(0, 0, 0, 0.8);
+          padding: 10px 3px;
+          margin: 5px;
+          text-align: center;
+        }
+        .number {
+          color: brown;
+          font-size: 2em;
+          margin: 10px 0;
+        }
+        .increase-btn, .decrease-btn {
+          padding: 5px 10px;
+          font-size: 1.2em;
+          cursor: pointer;
+/*           display: flex;
+          justify-content: center;
+          align-items: center; */
+        }
+      </style>
+      
+      <div class="counter-container">
+        <p class="number"></p>
+        <button class="increase-btn">+</button>
+        <button class="decrease-btn">-</button>
+      </div>
+    </template>
+
+    <script>
+      class CounterNumber extends HTMLElement {
+        constructor(){
+          super();
+          this.attachShadow({ mode: 'open'});
+          const template = document.getElementById('counter-template');
+          this.count = 0;
+          this.shadowRoot.appendChild(template.content.cloneNode(true));
+        }
+
+        connectedCallback() {
+          const btnIncrease = this.shadowRoot.querySelector('.increase-btn');
+          const btnDecrease = this.shadowRoot.querySelector('.decrease-btn');
+          const number = this.shadowRoot.querySelector('.number');
+
+          number.textContent = this.count;
+
+          btnIncrease.addEventListener('click', ()=> {
+            this.count++;
+            number.textContent = this.count;
+          })
+
+          btnDecrease.addEventListener('click', ()=> {
+            this.count--;
+            number.textContent = this.count;
+          })
+        }
+      }
+
+      customElements.define('simple-counter', CounterNumber);
+    </script>
+  </body>
+</html>
