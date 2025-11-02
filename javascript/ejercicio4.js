@@ -1,8 +1,4 @@
-/* Crea un código con setTimeout() 
-que muestre:
-Preparando sistema...
-Listo!
-*/
+//1.
 
 function cargarSistema(){
     console.log("Listo!");
@@ -10,15 +6,9 @@ function cargarSistema(){
 
 console.log("Preparando sistema...");
 
-setTimeout(cargarSistema, 2000);
+setTimeout(cargarSistema, 3000);
 
-/*Crea un array con 5 nombres de 
-personas y usa forEach() para mostrar 
-algo así:
-Hola, [nombre]! Bienvenido al sistema.
-
-usa una función flecha como callback 
-dentro del forEach(). */
+//2.
 
 let nombres = ["Mario", "Pedro", "Susan", "Valentina", "Rosario"]; 
 
