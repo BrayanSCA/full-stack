@@ -37,3 +37,5 @@ const agregarEstudiante = (nombre, nota) => {
     console.log(`El mejor estudiante es: ${mejorEstudiante.nombre} con una nota de ${mejorEstudiante.nota}`);
     console.log(`El promedio general del curso es: ${promedio}`);
 };
+
+
