@@ -8,9 +8,12 @@ const estudiantes = [
 ];
 
 //1.
-const listaEstudiantes = estudiantes.map(est => {
+/* const listaEstudiantes = estudiantes.map(est => {
     return `${est.nombre} (${est.nota})`
 });
+ */
+//corrección visual:
+const listaEstudiantes = estudiantes.map(est => `${est.nombre} (${est.nota})`).join(", ");
 
 //2.
 const aprobados = estudiantes.filter(aprob => aprob.nota >= 6);
