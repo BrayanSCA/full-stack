@@ -62,3 +62,28 @@ const estadisticas = numeros.reduce((acum, num)=> {
 }, { suma:"", promedio:"", minimo:"", maximo:"" });
 
 console.log("3-B: ", estadisticas);
+
+//3-C
+/* const productos = ["Laptop", "Lampara", "Mouse", "Mesa", "Libro"];
+
+const agruparPorLetra = productos.reduce((acum, pro) => {
+  if(!acum[pro.charAt(0)]) acum[pro.charAt(0)]= [];
+  pro.push(acum[pro.charAt(0)])
+}, {});
+
+console.log(agruparPorLetra); */
+
+//Corrección
+//3-C
+const productos = ["Laptop", "Lampara", "Mouse", "Mesa", "Libro"];
+
+const agruparPorLetra = productos.reduce((acum, pro) => {
+  const inicial = pro.charAt(0);
+  if(!acum[inicial]) {
+    acum[inicial]=[];
+  }
+  acum[inicial].push(pro);
+  return acum;
+}, {});
+
+console.log("3-C: ", agruparPorLetra);
